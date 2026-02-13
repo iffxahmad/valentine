@@ -1,45 +1,46 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-st.set_page_config(page_title="Valentine Proposal 💖", layout="centered")
+# Make page wide
+st.set_page_config(layout="wide")
+
+# Remove Streamlit padding/margins
+st.markdown("""
+    <style>
+        .block-container {
+            padding: 0rem;
+        }
+        iframe {
+            height: 100vh !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 html_code = """
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    text-align: center;
-    font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-}
-
-/* Floating hearts animation */
-.heart {
-    position: fixed;
-    bottom: -20px;
-    font-size: 24px;
-    animation: floatUp 6s linear infinite;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-800px);
-        opacity: 0;
-    }
+    font-family: Arial, sans-serif;
 }
 
 .container {
     position: relative;
-    height: 400px;
-    margin-top: 120px;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 button {
@@ -48,29 +49,19 @@ button {
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 #yesBtn {
     background-color: #ff4b5c;
     color: white;
-    margin-right: 30px;
-}
-
-#yesBtn:hover {
-    transform: scale(1.1);
+    margin: 20px;
 }
 
 #noBtn {
-    background-color: #444;
+    background-color: #333;
     color: white;
     position: absolute;
-}
-
-h1 {
-    font-size: 36px;
-    color: white;
-    margin-top: 80px;
 }
 
 </style>
@@ -78,9 +69,8 @@ h1 {
 
 <body>
 
-<h1>💖 Will you be my Valentine? 💖</h1>
-
 <div class="container">
+    <h1>💖 Will you be my Valentine? 💖</h1>
     <button id="yesBtn" onclick="yesClicked()">Yes 💕</button>
     <button id="noBtn">No 😢</button>
 </div>
@@ -88,20 +78,19 @@ h1 {
 <script>
 
 function yesClicked() {
-    document.body.innerHTML = "<h1 style='color:white; margin-top:200px;'>Yayyyyy!!! 💍❤️ I knew it! 💖</h1>";
+    document.body.innerHTML =
+        "<h1 style='color:white; text-align:center; margin-top:40vh;'>Yayyyy!!! ❤️</h1>";
 }
 
-/* Moving + shrinking No button */
 const noBtn = document.getElementById("noBtn");
 let scale = 1;
 
 noBtn.addEventListener("mouseover", function() {
-    const container = document.querySelector(".container");
-    const maxX = container.clientWidth - noBtn.offsetWidth;
-    const maxY = container.clientHeight - noBtn.offsetHeight;
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
 
-    const randomX = Math.floor(Math.random() * maxX);
-    const randomY = Math.floor(Math.random() * maxY);
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
 
     noBtn.style.left = randomX + "px";
     noBtn.style.top = randomY + "px";
@@ -112,28 +101,10 @@ noBtn.addEventListener("mouseover", function() {
     }
 });
 
-/* Generate floating hearts */
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 6000);
-}
-
-setInterval(createHeart, 300);
-
 </script>
 
 </body>
 </html>
 """
 
-components.html(html_code, height=600)
+components.html(html_code, height=800, scrolling=False)
