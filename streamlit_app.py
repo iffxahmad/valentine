@@ -70,7 +70,7 @@ button {
 <body>
 
 <div class="container">
-    <h1>💖 Will you be my Valentine? 💖</h1>
+    <h1>💖 Muhammad Hussain! Will you be my Valentine? 💖</h1>
     <button id="yesBtn" onclick="yesClicked()">Yes 💕</button>
     <button id="noBtn">No 😢</button>
 </div>
@@ -79,7 +79,7 @@ button {
 
 function yesClicked() {
     document.body.innerHTML =
-        "<h1 style='color:white; text-align:center; margin-top:40vh;'>Yayyyy!!! ❤️</h1>";
+        "<h1 style='color:white; text-align:center; margin-top:40vh;'>Yayyyy!!! ❤️</h1> <p>Distance may keep us apart, but it can never reduce the love I feel for you. Every mile between us only makes my heart grow fonder. You are my peace, my dua and my forever.</p><p>On this Valentine's Day I just want you to know that no matter how far you are, you live in my heart every single second.</p>";
 }
 
 const noBtn = document.getElementById("noBtn");
