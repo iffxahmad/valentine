@@ -1,21 +1,3 @@
-import streamlit as st
-import streamlit.components.v1 as components
-
-# Make page wide
-st.set_page_config(layout="wide")
-
-# Remove Streamlit padding/margins
-st.markdown("""
-    <style>
-        .block-container {
-            padding: 0rem;
-        }
-        iframe {
-            height: 100vh !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
 html_code = """
 <!DOCTYPE html>
 <html>
@@ -26,40 +8,63 @@ html_code = """
 html, body {
     margin: 0;
     padding: 0;
-    width: 100%;
     height: 100%;
+    width: 100%;
     overflow: hidden;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: white;
 }
 
+/* Center everything perfectly */
 .container {
-    position: relative;
     height: 100vh;
     width: 100vw;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    text-align: center;
+    padding: 20px;
 }
 
-button {
-    padding: 14px 30px;
+h1 {
+    font-size: 42px;
+    margin-bottom: 30px;
+    text-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+}
+
+p {
     font-size: 20px;
-    border-radius: 10px;
+    max-width: 700px;
+    line-height: 1.6;
+    margin-top: 15px;
+}
+
+/* Buttons */
+button {
+    padding: 14px 35px;
+    font-size: 20px;
+    border-radius: 50px;
     border: none;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    margin: 10px;
 }
 
 #yesBtn {
-    background-color: #ff4b5c;
-    color: white;
-    margin: 20px;
+    background: white;
+    color: #ff4b5c;
+    font-weight: bold;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
 }
 
 #noBtn {
-    background-color: #333;
+    background: rgba(0,0,0,0.6);
     color: white;
     position: absolute;
 }
@@ -78,10 +83,23 @@ button {
 <script>
 
 function yesClicked() {
-    document.body.innerHTML =
-        "<h1 style='color:white; text-align:center; margin-top:40vh;'>Yayyyy!!! ❤️</h1> <p>Distance may keep us apart, but it can never reduce the love I feel for you. Every mile between us only makes my heart grow fonder. You are my peace, my dua and my forever.</p><p>On this Valentine's Day I just want you to know that no matter how far you are, you live in my heart every single second.</p>";
+    document.body.innerHTML = `
+    <div class="container">
+        <h1>Yayyyy!!! ❤️</h1>
+        <p>
+        Distance may keep us apart, but it can never reduce the love I feel for you.
+        Every mile between us only makes my heart grow fonder.
+        You are my peace, my dua and my forever.
+        </p>
+        <p>
+        On this Valentine's Day I just want you to know that
+        no matter how far you are, you live in my heart every single second.
+        </p>
+    </div>
+    `;
 }
 
+/* Moving + shrinking No button */
 const noBtn = document.getElementById("noBtn");
 let scale = 1;
 
@@ -106,5 +124,3 @@ noBtn.addEventListener("mouseover", function() {
 </body>
 </html>
 """
-
-components.html(html_code, height=800, scrolling=False)
