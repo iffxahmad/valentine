@@ -1,3 +1,17 @@
+import streamlit as st
+import streamlit.components.v1 as components
+
+st.set_page_config(layout="wide")
+
+# Remove Streamlit padding safely
+st.markdown("""
+<style>
+.block-container {
+    padding: 0rem;
+}
+</style>
+""", unsafe_allow_html=True)
+
 html_code = """
 <!DOCTYPE html>
 <html>
@@ -10,16 +24,14 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
-    overflow: hidden;
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
     color: white;
 }
 
-/* Center everything perfectly */
+/* Perfect center */
 .container {
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,34 +41,30 @@ html, body {
 }
 
 h1 {
-    font-size: 42px;
+    font-size: 38px;
     margin-bottom: 30px;
-    text-shadow: 0px 4px 15px rgba(0,0,0,0.3);
 }
 
 p {
     font-size: 20px;
     max-width: 700px;
     line-height: 1.6;
-    margin-top: 15px;
 }
 
-/* Buttons */
 button {
     padding: 14px 35px;
     font-size: 20px;
     border-radius: 50px;
     border: none;
     cursor: pointer;
-    transition: 0.3s ease;
     margin: 10px;
+    transition: 0.3s ease;
 }
 
 #yesBtn {
     background: white;
     color: #ff4b5c;
     font-weight: bold;
-    box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
 }
 
 #yesBtn:hover {
@@ -99,7 +107,6 @@ function yesClicked() {
     `;
 }
 
-/* Moving + shrinking No button */
 const noBtn = document.getElementById("noBtn");
 let scale = 1;
 
@@ -124,3 +131,5 @@ noBtn.addEventListener("mouseover", function() {
 </body>
 </html>
 """
+
+components.html(html_code, height=900, scrolling=False)
